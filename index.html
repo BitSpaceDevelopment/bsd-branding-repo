@@ -720,7 +720,7 @@
           <li><a href="#principles">Principles</a></li>
           <li><a href="#voice">Voice</a></li>
         </ul>
-        <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">◐ Dark</button>
+        <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">◑ Light</button>
       </div>
     </div>
   </nav>
@@ -729,7 +729,7 @@
   <section id="hero" class="section">
     <div class="container">
       <div class="hero-logo">
-        <img id="hero-logo-img" src="logo-light.png" alt="BSD XR" />
+        <img id="hero-logo-img" src="logo-dark.png" alt="BSD XR" />
       </div>
       <div class="hero-tagline tracked-xl">Immersive Technology Experts</div>
       <p class="hero-desc">
@@ -1060,6 +1060,7 @@
       <div class="footer-inner">
         <span class="footer-text">© 2026 Bit Space Development Ltd. — BSD XR Brand Guide</span>
         <div class="footer-links">
+          <a href="https://bitspacedevelopment.github.io/bsd-branding-repo/" target="_blank" rel="noopener">View Live</a>
           <a href="https://bsdxr.com" target="_blank" rel="noopener">bsdxr.com</a>
           <a href="https://bsdxr.com/contact" target="_blank" rel="noopener">Contact</a>
           <a href="mailto:info@bsdxr.com">info@bsdxr.com</a>
@@ -1190,44 +1191,47 @@
     const navLogo   = document.getElementById('nav-logo-img');
     const heroLogo  = document.getElementById('hero-logo-img');
 
-    function applyTheme(isDark) {
-      if (isDark) {
+    /* makeDark=true → switch TO dark, makeDark=false → switch TO light */
+    function applyTheme(makeDark) {
+      if (makeDark) {
         html.classList.remove('light');
-        themeBtn.textContent = '◐ Dark';
+        themeBtn.textContent = '◑ Light';   /* now in dark — offer switch to Light */
         navLogo.src  = 'logo-dark.png';
-        heroLogo.src = 'logo-light.png';
+        heroLogo.src = 'logo-dark.png';
         localStorage.setItem('bsdxr-theme', 'dark');
-        /* auto-switch swatch view */
-        if (document.querySelector('[data-palette="dark"]')) {
-          document.querySelectorAll('[data-palette]').forEach(b => b.classList.remove('active'));
-          document.querySelector('[data-palette="dark"]').classList.add('active');
-          activePalette = 'dark';
-          renderSwatches('dark');
-        }
+        document.querySelectorAll('[data-palette]').forEach(b => b.classList.remove('active'));
+        document.querySelector('[data-palette="dark"]').classList.add('active');
+        activePalette = 'dark';
+        renderSwatches('dark');
       } else {
         html.classList.add('light');
-        themeBtn.textContent = '◑ Light';
+        themeBtn.textContent = '◐ Dark';    /* now in light — offer switch to Dark */
         navLogo.src  = 'logo-light.png';
-        heroLogo.src = 'logo-dark.png';
+        heroLogo.src = 'logo-light.png';
         localStorage.setItem('bsdxr-theme', 'light');
-        if (document.querySelector('[data-palette="light"]')) {
-          document.querySelectorAll('[data-palette]').forEach(b => b.classList.remove('active'));
-          document.querySelector('[data-palette="light"]').classList.add('active');
-          activePalette = 'light';
-          renderSwatches('light');
-        }
+        document.querySelectorAll('[data-palette]').forEach(b => b.classList.remove('active'));
+        document.querySelector('[data-palette="light"]').classList.add('active');
+        activePalette = 'light';
+        renderSwatches('light');
       }
     }
 
-    /* initialise logo based on stored theme */
-    const storedTheme = localStorage.getItem('bsdxr-theme');
-    if (storedTheme === 'light') {
-      navLogo.src  = 'logo-light.png';
-      heroLogo.src = 'logo-dark.png';
-      themeBtn.textContent = '◑ Light';
-    }
+    /* sync button label and logos with whatever theme was pre-applied */
+    (function initTheme() {
+      const isLight = html.classList.contains('light');
+      themeBtn.textContent = isLight ? '◐ Dark' : '◑ Light';
+      navLogo.src  = isLight ? 'logo-light.png' : 'logo-dark.png';
+      heroLogo.src = isLight ? 'logo-light.png' : 'logo-dark.png';
+      if (isLight) {
+        document.querySelectorAll('[data-palette]').forEach(b => b.classList.remove('active'));
+        document.querySelector('[data-palette="light"]').classList.add('active');
+        activePalette = 'light';
+        renderSwatches('light');
+      }
+    })();
 
     themeBtn.addEventListener('click', () => {
+      /* if currently light, make dark; if currently dark, make light */
       applyTheme(html.classList.contains('light'));
     });
 
