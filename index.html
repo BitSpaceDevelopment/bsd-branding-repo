@@ -709,7 +709,7 @@
     <div class="container">
       <div class="nav-inner">
         <div class="nav-logo">
-          <img id="nav-logo-img" src="logo-light.png" alt="BSD XR" />
+          <img id="nav-logo-img" src="logo-dark.png" alt="BSD XR" />
         </div>
         <ul class="nav-links" id="nav-links">
           <li><a href="#hero"        class="active">Overview</a></li>
@@ -729,7 +729,7 @@
   <section id="hero" class="section">
     <div class="container">
       <div class="hero-logo">
-        <img id="hero-logo-img" src="logo-light.png" alt="BSD XR" />
+        <img id="hero-logo-img" src="logo-dark.png" alt="BSD XR" />
       </div>
       <div class="hero-tagline tracked-xl">Immersive Technology Experts</div>
       <p class="hero-desc">
@@ -1196,8 +1196,8 @@
       if (makeDark) {
         html.classList.remove('light');
         themeBtn.textContent = '◑ Light';   /* now in dark — offer switch to Light */
-        navLogo.src  = 'logo-light.png';
-        heroLogo.src = 'logo-light.png';
+        navLogo.src  = 'logo-dark.png';
+        heroLogo.src = 'logo-dark.png';
         localStorage.setItem('bsdxr-theme', 'dark');
         document.querySelectorAll('[data-palette]').forEach(b => b.classList.remove('active'));
         document.querySelector('[data-palette="dark"]').classList.add('active');
@@ -1206,8 +1206,8 @@
       } else {
         html.classList.add('light');
         themeBtn.textContent = '◐ Dark';    /* now in light — offer switch to Dark */
-        navLogo.src  = 'logo-dark.png';
-        heroLogo.src = 'logo-dark.png';
+        navLogo.src  = 'logo-light.png';
+        heroLogo.src = 'logo-light.png';
         localStorage.setItem('bsdxr-theme', 'light');
         document.querySelectorAll('[data-palette]').forEach(b => b.classList.remove('active'));
         document.querySelector('[data-palette="light"]').classList.add('active');
@@ -1220,8 +1220,8 @@
     (function initTheme() {
       const isLight = html.classList.contains('light');
       themeBtn.textContent = isLight ? '◐ Dark' : '◑ Light';
-      navLogo.src  = isLight ? 'logo-dark.png' : 'logo-light.png';
-      heroLogo.src = isLight ? 'logo-dark.png' : 'logo-light.png';
+      navLogo.src  = isLight ? 'logo-light.png' : 'logo-dark.png';
+      heroLogo.src = isLight ? 'logo-light.png' : 'logo-dark.png';
       if (isLight) {
         document.querySelectorAll('[data-palette]').forEach(b => b.classList.remove('active'));
         document.querySelector('[data-palette="light"]').classList.add('active');
