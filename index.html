@@ -7,6 +7,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="icon" href="icons/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/Assets.xcassets/AppIcon.appiconset/180.png" />
+  <link rel="apple-touch-icon" sizes="167x167" href="icons/Assets.xcassets/AppIcon.appiconset/167.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="icons/Assets.xcassets/AppIcon.appiconset/152.png" />
   <script>
     try {
       if (localStorage.getItem('bsdxr-theme') === 'light')
@@ -691,6 +695,129 @@
       color: rgb(var(--color-text));
     }
 
+    /* ── Promo image ────────────────────────────────────────────────────── */
+    .promo-img {
+      width: 100%;
+      display: block;
+      border: 1px solid rgb(var(--color-border));
+      margin-bottom: 48px;
+    }
+
+    /* ── Icons ──────────────────────────────────────────────────────────── */
+    .icon-platform-group { margin-bottom: 40px; }
+    .icon-platform-label {
+      font-size: 9px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: rgb(var(--color-muted));
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgb(var(--color-border));
+    }
+    .icon-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1px;
+      background: rgb(var(--color-border));
+      border: 1px solid rgb(var(--color-border));
+    }
+    .icon-card {
+      background: rgb(var(--color-surface));
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      min-width: 120px;
+      flex: 1;
+      transition: background .15s;
+    }
+    .icon-card:hover { background: rgb(var(--color-surface-2)); }
+    .icon-card img { display: block; }
+    .icon-card-size {
+      font-size: 9px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgb(var(--color-muted));
+      text-align: center;
+    }
+    .icon-card-path {
+      font-size: 8px;
+      letter-spacing: .04em;
+      color: rgb(var(--color-muted));
+      text-align: center;
+      opacity: .6;
+      word-break: break-all;
+    }
+
+    /* ── Agents / Downloads ─────────────────────────────────────────────── */
+    .agent-intro {
+      max-width: 640px;
+      font-size: 12px;
+      color: rgb(var(--color-muted));
+      letter-spacing: .06em;
+      line-height: 1.8;
+      margin-bottom: 48px;
+      text-transform: uppercase;
+    }
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1px;
+      background: rgb(var(--color-border));
+      border: 1px solid rgb(var(--color-border));
+      margin-bottom: 40px;
+    }
+    .download-card {
+      background: rgb(var(--color-surface));
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: background .15s;
+    }
+    .download-card:hover { background: rgb(var(--color-surface-2)); }
+    .download-card-name {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgb(var(--color-text));
+    }
+    .download-card-desc {
+      font-size: 10px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgb(var(--color-muted));
+      line-height: 1.7;
+      flex: 1;
+    }
+    .download-card-filename {
+      font-size: 9px;
+      letter-spacing: .1em;
+      color: rgb(var(--color-muted));
+      opacity: .7;
+      margin-bottom: 4px;
+    }
+    .download-btn {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid rgb(var(--color-accent));
+      color: rgb(var(--color-accent));
+      text-decoration: none;
+      transition: all .15s;
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+    .download-btn:hover {
+      background: rgb(var(--color-accent));
+      color: rgb(var(--color-background));
+    }
+
     /* ── Responsive ────────────────────────────────────────────────────── */
     @media (max-width: 700px) {
       .nav-links { display: none; }
@@ -709,16 +836,18 @@
     <div class="container">
       <div class="nav-inner">
         <div class="nav-logo">
-          <img id="nav-logo-img" src="logo-dark.png" alt="BSD XR" />
+          <img id="nav-logo-img" src="logos/logo-dark.png" alt="BSD XR" />
         </div>
         <ul class="nav-links" id="nav-links">
           <li><a href="#hero"        class="active">Overview</a></li>
           <li><a href="#colours">Colours</a></li>
           <li><a href="#typography">Type</a></li>
           <li><a href="#logo">Logo</a></li>
+          <li><a href="#icons">Icons</a></li>
           <li><a href="#components">Components</a></li>
           <li><a href="#principles">Principles</a></li>
           <li><a href="#voice">Voice</a></li>
+          <li><a href="#agents">Agents</a></li>
         </ul>
         <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">◑ Light</button>
       </div>
@@ -729,7 +858,7 @@
   <section id="hero" class="section">
     <div class="container">
       <div class="hero-logo">
-        <img id="hero-logo-img" src="logo-dark.png" alt="BSD XR" />
+        <img id="hero-logo-img" src="logos/logo-dark.png" alt="BSD XR" />
       </div>
       <div class="hero-tagline tracked-xl">Immersive Technology Experts</div>
       <p class="hero-desc">
@@ -757,6 +886,11 @@
       </div>
     </div>
   </section>
+
+  <!-- ── Promo ──────────────────────────────────────────────────────── -->
+  <div class="container" style="padding-top:0;padding-bottom:0">
+    <img src="BSDXR Promo.png" alt="BSD XR — Immersive Technology Experts" class="promo-img" />
+  </div>
 
   <!-- ── Colours ────────────────────────────────────────────────────── -->
   <section id="colours" class="section">
@@ -869,11 +1003,11 @@
 
       <div class="logo-grid">
         <div class="logo-card logo-card-dark">
-          <img src="logo-dark.png" alt="BSD XR logo — dark version" />
+          <img src="logos/logo-dark.png" alt="BSD XR logo — dark version" />
           <span class="logo-card-label">Dark Version — on dark backgrounds</span>
         </div>
         <div class="logo-card logo-card-light">
-          <img src="logo-light.png" alt="BSD XR logo — light version" />
+          <img src="logos/logo-light.png" alt="BSD XR logo — light version" />
           <span class="logo-card-label">Light Version — on light backgrounds</span>
         </div>
       </div>
@@ -911,10 +1045,110 @@
     </div>
   </section>
 
+  <!-- ── Icons ─────────────────────────────────────────────────────── -->
+  <section id="icons" class="section">
+    <div class="container">
+      <div class="section-label">05 — App Icons</div>
+      <div class="section-title">Icons</div>
+
+      <!-- Favicon + base icon -->
+      <div class="icon-platform-group">
+        <div class="icon-platform-label">Favicon &amp; Base</div>
+        <div class="icon-grid">
+          <div class="icon-card">
+            <img src="icons/favicon.png" width="32" height="32" alt="Favicon" />
+            <div class="icon-card-size">32 × 32</div>
+            <div class="icon-card-path">icons/favicon.png</div>
+          </div>
+          <div class="icon-card">
+            <img src="icons/BSDXR Icon.png" width="64" height="64" alt="BSD XR Icon" />
+            <div class="icon-card-size">Source Icon</div>
+            <div class="icon-card-path">icons/BSDXR Icon.png</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- iOS -->
+      <div class="icon-platform-group">
+        <div class="icon-platform-label">iOS — iPhone &amp; iPad</div>
+        <div class="icon-grid">
+          <div class="icon-card">
+            <img src="icons/Assets.xcassets/AppIcon.appiconset/60.png" width="60" height="60" alt="iPhone 20pt @3x" />
+            <div class="icon-card-size">60 × 60</div>
+            <div class="icon-card-path">iPhone 20pt @3x</div>
+          </div>
+          <div class="icon-card">
+            <img src="icons/Assets.xcassets/AppIcon.appiconset/120.png" width="60" height="60" alt="iPhone 60pt @2x" />
+            <div class="icon-card-size">120 × 120</div>
+            <div class="icon-card-path">iPhone 60pt @2x</div>
+          </div>
+          <div class="icon-card">
+            <img src="icons/Assets.xcassets/AppIcon.appiconset/180.png" width="60" height="60" alt="iPhone 60pt @3x" />
+            <div class="icon-card-size">180 × 180</div>
+            <div class="icon-card-path">iPhone 60pt @3x — Primary</div>
+          </div>
+          <div class="icon-card">
+            <img src="icons/Assets.xcassets/AppIcon.appiconset/152.png" width="60" height="60" alt="iPad 76pt @2x" />
+            <div class="icon-card-size">152 × 152</div>
+            <div class="icon-card-path">iPad 76pt @2x</div>
+          </div>
+          <div class="icon-card">
+            <img src="icons/Assets.xcassets/AppIcon.appiconset/167.png" width="60" height="60" alt="iPad Pro 83.5pt @2x" />
+            <div class="icon-card-size">167 × 167</div>
+            <div class="icon-card-path">iPad Pro @2x</div>
+          </div>
+          <div class="icon-card">
+            <img src="icons/appstore.png" width="60" height="60" alt="App Store" />
+            <div class="icon-card-size">1024 × 1024</div>
+            <div class="icon-card-path">icons/appstore.png — App Store</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Android -->
+      <div class="icon-platform-group">
+        <div class="icon-platform-label">Android — Launcher Icons</div>
+        <div class="icon-grid">
+          <div class="icon-card">
+            <img src="icons/android/mipmap-mdpi/ic_launcher.png" width="48" height="48" alt="mdpi" />
+            <div class="icon-card-size">48 × 48</div>
+            <div class="icon-card-path">mipmap-mdpi</div>
+          </div>
+          <div class="icon-card">
+            <img src="icons/android/mipmap-hdpi/ic_launcher.png" width="72" height="72" alt="hdpi" />
+            <div class="icon-card-size">72 × 72</div>
+            <div class="icon-card-path">mipmap-hdpi</div>
+          </div>
+          <div class="icon-card">
+            <img src="icons/android/mipmap-xhdpi/ic_launcher.png" width="96" height="96" alt="xhdpi" />
+            <div class="icon-card-size">96 × 96</div>
+            <div class="icon-card-path">mipmap-xhdpi</div>
+          </div>
+          <div class="icon-card">
+            <img src="icons/android/mipmap-xxhdpi/ic_launcher.png" width="60" height="60" alt="xxhdpi" />
+            <div class="icon-card-size">144 × 144</div>
+            <div class="icon-card-path">mipmap-xxhdpi</div>
+          </div>
+          <div class="icon-card">
+            <img src="icons/android/mipmap-xxxhdpi/ic_launcher.png" width="60" height="60" alt="xxxhdpi" />
+            <div class="icon-card-size">192 × 192</div>
+            <div class="icon-card-path">mipmap-xxxhdpi</div>
+          </div>
+          <div class="icon-card">
+            <img src="icons/playstore.png" width="60" height="60" alt="Play Store" />
+            <div class="icon-card-size">512 × 512</div>
+            <div class="icon-card-path">icons/playstore.png — Play Store</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ── Components ─────────────────────────────────────────────────── -->
   <section id="components" class="section">
     <div class="container">
-      <div class="section-label">05 — Component Library</div>
+      <div class="section-label">06 — Component Library</div>
       <div class="section-title">Components</div>
 
       <div class="component-grid">
@@ -1015,7 +1249,7 @@
   <!-- ── Design Principles ──────────────────────────────────────────── -->
   <section id="principles" class="section">
     <div class="container">
-      <div class="section-label">06 — Design Principles</div>
+      <div class="section-label">07 — Design Principles</div>
       <div class="section-title">Non-Negotiable Rules</div>
 
       <div class="principles-grid" id="principles-grid"></div>
@@ -1025,7 +1259,7 @@
   <!-- ── Brand Voice ────────────────────────────────────────────────── -->
   <section id="voice" class="section">
     <div class="container">
-      <div class="section-label">07 — Brand Voice</div>
+      <div class="section-label">08 — Brand Voice</div>
       <div class="section-title">Voice &amp; Tone</div>
 
       <div class="voice-grid" id="voice-grid"></div>
@@ -1051,6 +1285,86 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ── For AI Agents ──────────────────────────────────────────────── -->
+  <section id="agents" class="section">
+    <div class="container">
+      <div class="section-label">09 — For AI Agents</div>
+      <div class="section-title">Agent Resources</div>
+
+      <p class="agent-intro">
+        This repository is the canonical source of truth for all BSD XR brand assets
+        and design system specifications. The files below are structured for consumption
+        by AI agents, LLMs, and automated systems. Download any file to provide brand
+        context to your agent or workflow.
+      </p>
+
+      <div class="download-grid">
+
+        <div class="download-card">
+          <div class="download-card-name">Brand Guide</div>
+          <div class="download-card-desc">
+            Full brand specification — colours, typography, logo rules, component patterns,
+            UI principles, voice and tone.
+          </div>
+          <div class="download-card-filename">branding.md</div>
+          <a class="download-btn" href="branding.md" download>Download</a>
+        </div>
+
+        <div class="download-card">
+          <div class="download-card-name">Brand Voice</div>
+          <div class="download-card-desc">
+            Voice and tone guide for AI-generated content — writing rules, do/don't examples,
+            sector terminology, and a copy checklist.
+          </div>
+          <div class="download-card-filename">brand-voice.md</div>
+          <a class="download-btn" href="brand-voice.md" download>Download</a>
+        </div>
+
+        <div class="download-card">
+          <div class="download-card-name">Agent Guide</div>
+          <div class="download-card-desc">
+            Instructions for AI agents — repository structure, colour tokens, logo selection,
+            icon guide, HTML meta tags, and component quick reference.
+          </div>
+          <div class="download-card-filename">agent-guide.md</div>
+          <a class="download-btn" href="agent-guide.md" download>Download</a>
+        </div>
+
+        <div class="download-card">
+          <div class="download-card-name">Theme Tokens</div>
+          <div class="download-card-desc">
+            Machine-readable colour and typography tokens in JSON format.
+            Import directly into build tools, design systems, or codegen pipelines.
+          </div>
+          <div class="download-card-filename">theme.json</div>
+          <a class="download-btn" href="theme.json" download>Download</a>
+        </div>
+
+      </div>
+
+      <div class="section-label" style="margin-bottom:16px">How to use with an AI agent</div>
+      <div class="rules-list">
+        <div class="rule-row">
+          <span class="rule-icon do" style="min-width:24px">1</span>
+          <span class="rule-text">Download <strong>agent-guide.md</strong> and include it in your agent's system prompt or context window as the primary technical reference.</span>
+        </div>
+        <div class="rule-row">
+          <span class="rule-icon do" style="min-width:24px">2</span>
+          <span class="rule-text">Download <strong>brand-voice.md</strong> when the agent will generate copy, marketing text, UI labels, or any written content.</span>
+        </div>
+        <div class="rule-row">
+          <span class="rule-icon do" style="min-width:24px">3</span>
+          <span class="rule-text">Download <strong>theme.json</strong> for programmatic access to colour tokens — useful for code generation and design tooling.</span>
+        </div>
+        <div class="rule-row">
+          <span class="rule-icon do" style="min-width:24px">4</span>
+          <span class="rule-text">Reference logo files from <strong>logos/</strong> and icons from <strong>icons/</strong> using the paths specified in agent-guide.md.</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1196,8 +1510,8 @@
       if (makeDark) {
         html.classList.remove('light');
         themeBtn.textContent = '◑ Light';   /* now in dark — offer switch to Light */
-        navLogo.src  = 'logo-dark.png';
-        heroLogo.src = 'logo-dark.png';
+        navLogo.src  = 'logos/logo-dark.png';
+        heroLogo.src = 'logos/logo-dark.png';
         localStorage.setItem('bsdxr-theme', 'dark');
         document.querySelectorAll('[data-palette]').forEach(b => b.classList.remove('active'));
         document.querySelector('[data-palette="dark"]').classList.add('active');
@@ -1206,8 +1520,8 @@
       } else {
         html.classList.add('light');
         themeBtn.textContent = '◐ Dark';    /* now in light — offer switch to Dark */
-        navLogo.src  = 'logo-light.png';
-        heroLogo.src = 'logo-light.png';
+        navLogo.src  = 'logos/logo-light.png';
+        heroLogo.src = 'logos/logo-light.png';
         localStorage.setItem('bsdxr-theme', 'light');
         document.querySelectorAll('[data-palette]').forEach(b => b.classList.remove('active'));
         document.querySelector('[data-palette="light"]').classList.add('active');
@@ -1220,8 +1534,8 @@
     (function initTheme() {
       const isLight = html.classList.contains('light');
       themeBtn.textContent = isLight ? '◐ Dark' : '◑ Light';
-      navLogo.src  = isLight ? 'logo-light.png' : 'logo-dark.png';
-      heroLogo.src = isLight ? 'logo-light.png' : 'logo-dark.png';
+      navLogo.src  = isLight ? 'logos/logo-light.png' : 'logos/logo-dark.png';
+      heroLogo.src = isLight ? 'logos/logo-light.png' : 'logos/logo-dark.png';
       if (isLight) {
         document.querySelectorAll('[data-palette]').forEach(b => b.classList.remove('active'));
         document.querySelector('[data-palette="light"]').classList.add('active');
@@ -1247,7 +1561,7 @@
     });
 
     /* ── Active nav on scroll ────────────────────────────────────────── */
-    const sections = ['hero','colours','typography','logo','components','principles','voice'];
+    const sections = ['hero','colours','typography','logo','icons','components','principles','voice','agents'];
     const navAs    = document.querySelectorAll('#nav-links a');
 
     const obs = new IntersectionObserver(entries => {
