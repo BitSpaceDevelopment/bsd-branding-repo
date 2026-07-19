@@ -46,9 +46,18 @@ bsd-branding-repo/
 
 ---
 
+## Prefer the Claude Code skill
+
+If you're operating as a Claude Code agent, check for
+[`.claude/skills/bsd-branding/`](./.claude/skills/bsd-branding/) first — it's a
+self-contained, portable skill bundling `theme.json`, `theme.schema.json`, and
+the logo files, meant to be copied into any project's `.claude/skills/` so this
+guide doesn't need to be re-fetched or pasted into a prompt by hand.
+
 ## Colour tokens
 
-Read from `theme.json` for machine-readable tokens. The design system uses CSS custom properties with space-separated RGB channels for Tailwind CSS opacity modifier compatibility.
+Read from `theme.json` for machine-readable tokens, and validate any edits
+against [`theme.schema.json`](./theme.schema.json). The design system uses CSS custom properties with space-separated RGB channels for Tailwind CSS opacity modifier compatibility.
 
 ### Dark mode (default)
 

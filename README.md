@@ -34,7 +34,14 @@ bsd-branding-repo/
 ├── brand-voice.md        # Voice and tone guide for AI agents and copywriters
 ├── agent-guide.md        # AI agent instructions — assets, tokens, component reference
 ├── theme.json            # Brand tokens in JSON (colours, typography, logos)
+├── theme.schema.json     # JSON Schema for theme.json — validation + editor autocomplete
 ├── vercel.json           # Vercel routing config for SPA
+├── .claude/skills/bsd-branding/  # Portable Claude Code skill — see "For AI Agents" below
+│   ├── SKILL.md          # Skill instructions (condensed brand rules)
+│   ├── theme.json        # Bundled copy of the tokens, kept in sync with root
+│   ├── theme.schema.json # Bundled copy of the schema
+│   ├── logos/            # Bundled logo-dark.png / logo-light.png
+│   └── icons/            # Bundled favicon.png
 ├── logos/
 │   ├── logo-dark.png     # White wordmark + gradient XR — use on dark backgrounds
 │   └── logo-light.png    # Black wordmark + gradient XR — use on light backgrounds
@@ -155,7 +162,29 @@ To prevent flash-of-dark on light preference, add this inline before any scripts
 
 ## For AI Agents
 
-Three structured files are included for AI agent and LLM consumption:
+### Claude Code — drop-in skill (recommended)
+
+[`.claude/skills/bsd-branding/`](./.claude/skills/bsd-branding/) is a
+self-contained, portable Claude Code skill. It bundles `theme.json`,
+`theme.schema.json`, and the two logo PNGs, so copying just that one folder
+into any project's `.claude/skills/` gives Claude Code instant, offline brand
+awareness — no need to go hunting for this repo, download individual files, or
+paste tokens into a prompt by hand.
+
+```bash
+# from another project's repo root
+mkdir -p .claude/skills/bsd-branding
+curl -L https://github.com/BitSpaceDevelopment/bsd-branding-repo/archive/refs/heads/main.tar.gz \
+  | tar -xz -C .claude/skills/bsd-branding --strip-components=4 \
+    bsd-branding-repo-main/.claude/skills/bsd-branding
+```
+
+(Or just clone this repo and copy the folder — see the folder's `SKILL.md`
+for what's inside and how to keep it in sync when tokens change upstream.)
+
+### Everything else
+
+Structured files for AI agent and LLM consumption more generally:
 
 | File | Purpose |
 |---|---|
@@ -163,8 +192,12 @@ Three structured files are included for AI agent and LLM consumption:
 | [`brand-voice.md`](./brand-voice.md) | Writing guide — tone, style rules, do/don't examples, sector terminology |
 | [`branding.md`](./branding.md) | Full brand specification in Markdown |
 | [`theme.json`](./theme.json) | Machine-readable colour and typography tokens |
+| [`theme.schema.json`](./theme.schema.json) | JSON Schema for `theme.json` — validate edits, get editor autocomplete |
 
-To use with an AI agent: include `agent-guide.md` in your system prompt for UI generation, or `brand-voice.md` for content generation.
+To use with an AI agent: include `agent-guide.md` in your system prompt for UI generation, or `brand-voice.md` for content generation. The live guide's
+[Agents section](https://bitspacedevelopment.github.io/bsd-branding-repo/#agents)
+has one-click "Copy JSON" buttons for `theme.json` and `theme.schema.json` if
+you just need them on your clipboard.
 
 ---
 

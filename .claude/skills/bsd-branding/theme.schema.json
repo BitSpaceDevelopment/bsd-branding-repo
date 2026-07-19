@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/BitSpaceDevelopment/bsd-branding-repo/blob/main/theme.schema.json",
+  "title": "BSD XR Theme Tokens",
+  "description": "Schema for theme.json — machine-readable BSD XR (Bit Space Development) brand tokens: colours, typography, logos, and design principles.",
+  "type": "object",
+  "required": ["brand", "company", "tagline", "typography", "logos", "themes"],
+  "additionalProperties": true,
+  "properties": {
+    "$schema": { "type": "string" },
+    "brand": { "type": "string" },
+    "company": { "type": "string" },
+    "tagline": { "type": "string" },
+
+    "typography": {
+      "type": "object",
+      "required": ["primary", "fallback", "weights", "casing"],
+      "properties": {
+        "primary": { "type": "string" },
+        "fallback": { "type": "string" },
+        "googleFontsUrl": { "type": "string", "format": "uri" },
+        "weights": {
+          "type": "array",
+          "items": { "type": "integer" },
+          "minItems": 1
+        },
+        "casing": { "type": "string", "enum": ["uppercase", "lowercase", "none"] },
+        "letterSpacing": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+
+    "logos": {
+      "type": "object",
+      "required": ["dark", "light"],
+      "properties": {
+        "dark": { "$ref": "#/$defs/logoVariant" },
+        "light": { "$ref": "#/$defs/logoVariant" },
+        "brandBlue": {
+          "type": "object",
+          "required": ["gradient", "from", "to"],
+          "properties": {
+            "gradient": { "type": "string" },
+            "from": { "$ref": "#/$defs/hexColor" },
+            "to": { "$ref": "#/$defs/hexColor" },
+            "notes": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "themes": {
+      "type": "object",
+      "required": ["dark", "light"],
+      "properties": {
+        "dark": { "$ref": "#/$defs/themeVariant" },
+        "light": { "$ref": "#/$defs/themeVariant" }
+      }
+    },
+
+    "implementation": {
+      "type": "object",
+      "properties": {
+        "method": { "type": "string" },
+        "themeClass": { "type": "string" },
+        "themeClassTarget": { "type": "string" },
+        "persistence": { "type": "string" },
+        "defaultTheme": { "type": "string", "enum": ["dark", "light"] },
+        "cssVariableFormat": { "type": "string" },
+        "example": {
+          "type": "object",
+          "properties": {
+            "cssVariable": { "type": "string" },
+            "tailwindUsage": { "type": "string" },
+            "generatedClass": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "designPrinciples": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+
+  "$defs": {
+    "hexColor": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+    "rgbTriplet": {
+      "type": "string",
+      "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$"
+    },
+    "logoVariant": {
+      "type": "object",
+      "required": ["file", "description", "usage"],
+      "properties": {
+        "file": { "type": "string" },
+        "description": { "type": "string" },
+        "usage": { "type": "string" }
+      }
+    },
+    "colorToken": {
+      "type": "object",
+      "required": ["hex", "rgb", "usage"],
+      "properties": {
+        "hex": { "$ref": "#/$defs/hexColor" },
+        "rgb": { "$ref": "#/$defs/rgbTriplet" },
+        "usage": { "type": "string" }
+      }
+    },
+    "statusColor": {
+      "type": "object",
+      "properties": {
+        "border": { "$ref": "#/$defs/hexColor" },
+        "text": { "$ref": "#/$defs/hexColor" },
+        "tailwind": { "type": "string" }
+      }
+    },
+    "themeVariant": {
+      "type": "object",
+      "required": ["name", "colors"],
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "colors": {
+          "type": "object",
+          "required": ["background", "surface", "surface-2", "border", "border-light", "text", "muted", "accent"],
+          "properties": {
+            "background": { "$ref": "#/$defs/colorToken" },
+            "surface": { "$ref": "#/$defs/colorToken" },
+            "surface-2": { "$ref": "#/$defs/colorToken" },
+            "border": { "$ref": "#/$defs/colorToken" },
+            "border-light": { "$ref": "#/$defs/colorToken" },
+            "text": { "$ref": "#/$defs/colorToken" },
+            "muted": { "$ref": "#/$defs/colorToken" },
+            "accent": { "$ref": "#/$defs/colorToken" }
+          }
+        },
+        "statusColors": {
+          "type": "object",
+          "properties": {
+            "discontinued": { "$ref": "#/$defs/statusColor" },
+            "filtered": { "$ref": "#/$defs/statusColor" },
+            "winner": { "$ref": "#/$defs/statusColor" },
+            "error": { "$ref": "#/$defs/statusColor" },
+            "active": { "$ref": "#/$defs/statusColor" }
+          }
+        }
+      }
+    }
+  }
+}

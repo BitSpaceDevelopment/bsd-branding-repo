@@ -1346,7 +1346,37 @@
             Import directly into build tools, design systems, or codegen pipelines.
           </div>
           <div class="download-card-filename">theme.json</div>
-          <a class="download-btn" href="theme.json" download>Download</a>
+          <div class="component-row" style="margin-top:0">
+            <a class="download-btn" href="theme.json" download>Download</a>
+            <button class="download-btn copy-json-btn" type="button" data-json-src="theme.json" style="border-color:rgb(var(--color-border));color:rgb(var(--color-muted));cursor:pointer">Copy JSON</button>
+            <a class="download-btn" style="border-color:rgb(var(--color-border));color:rgb(var(--color-muted))" href="https://raw.githubusercontent.com/BitSpaceDevelopment/bsd-branding-repo/main/theme.json" target="_blank" rel="noopener">Raw</a>
+          </div>
+        </div>
+
+        <div class="download-card">
+          <div class="download-card-name">Theme Schema</div>
+          <div class="download-card-desc">
+            JSON Schema (2020-12) describing the shape of <code>theme.json</code>.
+            Wire it up in your editor for validation and autocomplete, or use it
+            to validate token edits before shipping them.
+          </div>
+          <div class="download-card-filename">theme.schema.json</div>
+          <div class="component-row" style="margin-top:0">
+            <a class="download-btn" href="theme.schema.json" download>Download</a>
+            <button class="download-btn copy-json-btn" type="button" data-json-src="theme.schema.json" style="border-color:rgb(var(--color-border));color:rgb(var(--color-muted));cursor:pointer">Copy JSON</button>
+          </div>
+        </div>
+
+        <div class="download-card">
+          <div class="download-card-name">Claude Skill Package</div>
+          <div class="download-card-desc">
+            Self-contained Claude Code skill — bundles <code>theme.json</code>,
+            <code>theme.schema.json</code>, and the logo files. Drop the whole
+            folder into any project's <code>.claude/skills/</code> for instant,
+            offline brand awareness — no need to hunt for this repo first.
+          </div>
+          <div class="download-card-filename">.claude/skills/bsd-branding/</div>
+          <a class="download-btn" href="https://github.com/BitSpaceDevelopment/bsd-branding-repo/tree/main/.claude/skills/bsd-branding" target="_blank" rel="noopener">View on GitHub</a>
         </div>
 
         <div class="download-card">
@@ -1370,18 +1400,22 @@
       <div class="rules-list">
         <div class="rule-row">
           <span class="rule-icon do" style="min-width:24px">1</span>
-          <span class="rule-text">Download <strong>agent-guide.md</strong> and include it in your agent's system prompt or context window as the primary technical reference.</span>
+          <span class="rule-text">Using Claude Code? Copy <strong>.claude/skills/bsd-branding/</strong> into your project's <strong>.claude/skills/</strong> — it's self-contained, so agents get tokens, schema, and logos with no extra setup.</span>
         </div>
         <div class="rule-row">
           <span class="rule-icon do" style="min-width:24px">2</span>
-          <span class="rule-text">Download <strong>brand-voice.md</strong> when the agent will generate copy, marketing text, UI labels, or any written content.</span>
+          <span class="rule-text">Otherwise, download <strong>agent-guide.md</strong> and include it in your agent's system prompt or context window as the primary technical reference.</span>
         </div>
         <div class="rule-row">
           <span class="rule-icon do" style="min-width:24px">3</span>
-          <span class="rule-text">Download <strong>theme.json</strong> for programmatic access to colour tokens — useful for code generation and design tooling.</span>
+          <span class="rule-text">Download <strong>brand-voice.md</strong> when the agent will generate copy, marketing text, UI labels, or any written content.</span>
         </div>
         <div class="rule-row">
           <span class="rule-icon do" style="min-width:24px">4</span>
+          <span class="rule-text">Use <strong>Copy JSON</strong> above to grab <strong>theme.json</strong> straight to your clipboard, validated against <strong>theme.schema.json</strong>, for programmatic access to colour tokens.</span>
+        </div>
+        <div class="rule-row">
+          <span class="rule-icon do" style="min-width:24px">5</span>
           <span class="rule-text">Reference logo files from <strong>logos/</strong> and icons from <strong>icons/</strong> using the paths specified in agent-guide.md.</span>
         </div>
       </div>
@@ -1579,6 +1613,22 @@
         navigator.clipboard.writeText(text).catch(() => {});
         const orig = btn.textContent;
         btn.textContent = 'Copied';
+        setTimeout(() => btn.textContent = orig, 1200);
+      });
+    });
+
+    /* ── Copy JSON buttons (theme.json / theme.schema.json) ───────────── */
+    document.querySelectorAll('.copy-json-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const orig = btn.textContent;
+        try {
+          const res = await fetch(btn.dataset.jsonSrc);
+          const text = await res.text();
+          await navigator.clipboard.writeText(text);
+          btn.textContent = 'Copied';
+        } catch (e) {
+          btn.textContent = 'Failed';
+        }
         setTimeout(() => btn.textContent = orig, 1200);
       });
     });
